@@ -1,6 +1,6 @@
-import Navbar from '../components/Navbar/Navbar';
-import PageHeader from '../components/Headers/PageHeader';
-import UsersRoute from '../routes/UsersRoute';
+import Navbar from '../../components/Navbar/Navbar';
+import PageHeader from '../../components/Headers/PageHeader';
+import UsersRoute from '../../routes/UserRoutes/UsersRoute';
 import { Link } from 'react-router-dom';
 
 const UsersPage = () => {

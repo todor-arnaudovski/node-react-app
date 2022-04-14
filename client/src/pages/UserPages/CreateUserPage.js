@@ -1,6 +1,6 @@
-import Navbar from '../components/Navbar/Navbar';
-import PageHeader from '../components/Headers/PageHeader';
-import CreateUserRoute from '../routes/CreateUserRoute';
+import Navbar from '../../components/Navbar/Navbar';
+import PageHeader from '../../components/Headers/PageHeader';
+import CreateUserRoute from '../../routes/UserRoutes/CreateUserRoute';
 
 const CreateUserPage = () => {
   return (

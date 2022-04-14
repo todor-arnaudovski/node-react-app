@@ -1,6 +1,6 @@
-import Navbar from '../components/Navbar/Navbar';
-import PageHeader from '../components/Headers/PageHeader';
-import BookRoute from '../routes/BookRoute';
+import Navbar from '../../components/Navbar/Navbar';
+import PageHeader from '../../components/Headers/PageHeader';
+import BookRoute from '../../routes/BookRoutes/BookRoute';
 
 const BookPage = () => {
   return (

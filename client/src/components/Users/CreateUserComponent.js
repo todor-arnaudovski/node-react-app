@@ -26,8 +26,6 @@ const CreateUserComponent = () => {
       interests: inputs.interests,
     };
 
-    console.log(userData)
-
     createUser(userData);
 
     navigate('../users', { replace: true });
@@ -56,7 +54,7 @@ const CreateUserComponent = () => {
         />
       </Form.Group>
       <Form.Group className='mb-3' controlId='interests'>
-        <Form.Label>Password</Form.Label>
+        <Form.Label>Interests</Form.Label>
         <Form.Control
           as='textarea'
           rows={3}

@@ -2,11 +2,12 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
-import UsersPage from './pages/UsersPage';
-import UserPage from './pages/UserPage';
-import CreateUserPage from './pages/CreateUserPage';
-import BooksPage from './pages/BooksPage';
-import BookPage from './pages/BookPage';
+import UsersPage from './pages/UserPages/UsersPage';
+import UserPage from './pages/UserPages/UserPage';
+import CreateUserPage from './pages/UserPages/CreateUserPage';
+import BooksPage from './pages/BookPages/BooksPage';
+import BookPage from './pages/BookPages/BookPage';
+import CreateBookPage from './pages/BookPages/CreateBookPage';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <Route path="users/new" element={<CreateUserPage />} />
         <Route path="books" element={<BooksPage />} />
         <Route path="books/:title" element={<BookPage />} />
-        {/* <Route path="users/new" element={<CreateUserPage />} /> */}
+        <Route path="books/new" element={<CreateBookPage />} />
       </Routes>
     </BrowserRouter>
   );
