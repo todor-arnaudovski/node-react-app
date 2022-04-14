@@ -3,7 +3,7 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 
 const HomePage = () => {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="mb-5">
       <Container>
         <Navbar.Brand as={Link} to="/">
           App
@@ -14,6 +14,7 @@ const HomePage = () => {
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/about">About</Nav.Link>
             <Nav.Link as={Link} to="/users">Users</Nav.Link>
+            <Nav.Link as={Link} to="/Books">Books</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -1,24 +1,34 @@
 import { Outlet, Link } from 'react-router-dom';
-import CreateUserComponent from '../Users/CreateUserComponent';
+import { Table } from 'react-bootstrap';
 
 const Users = (props) => {
   const users = props.users;
-  const usersList = users.map((user) => {
+  const usersRows = users.map((user) => {
     return (
-      <li key={user.id}>
-        <Link to={`/users/${user.username}`} key={user.username}>
-          {user.username}
-        </Link>
-      </li>
+      <tr key={user.id}>
+        <td>{user.id}</td>
+        <td>
+          <Link to={`/users/${user.firstName}`}>
+            {user.firstName}
+          </Link>
+        </td>
+        <td>{user.lastName}</td>
+      </tr>
     );
   });
 
   return (
-    <div className="d-flex flex-column align-items-center">
-      <ul className="list-unstyled">{usersList}</ul>
-      <div>
-        <CreateUserComponent />
-      </div>
+    <div className='mb-4'>
+      <Table striped bordered hover size='sm'>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+          </tr>
+        </thead>
+        <tbody>{usersRows}</tbody>
+      </Table>
       <Outlet />
     </div>
   );

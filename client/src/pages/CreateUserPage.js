@@ -1,16 +1,17 @@
 import Navbar from '../components/Navbar/Navbar';
 import PageHeader from '../components/Headers/PageHeader';
+import CreateUserRoute from '../routes/CreateUserRoute';
 
-const HomePage = () => {
+const CreateUserPage = () => {
   return (
     <div className='App'>
       <Navbar />
       <div className='container'>
-        <PageHeader title='Home page' />
-        <p>This is the home page! Feel free to look around...</p>
+        <PageHeader title='Create User Page' />
+        <CreateUserRoute />
       </div>
     </div>
   );
 };
 
-export default HomePage;
+export default CreateUserPage;

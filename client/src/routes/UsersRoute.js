@@ -11,11 +11,7 @@ const Users = () => {
     });
   }, []);
 
-  return (
-    <div>
-      <UsersComponent users={users}/>
-    </div>
-  );
+  return <UsersComponent users={users} />;
 };
 
 export default Users;

@@ -1,16 +1,17 @@
 import Navbar from '../components/Navbar/Navbar';
+import PageHeader from '../components/Headers/PageHeader';
 import UserRoute from '../routes/UserRoute';
 
-const AboutPage = () => {
+const UserPage = () => {
   return (
-    <div className="App">
+    <div className='App'>
       <Navbar />
-      <div className="container">
-        <h1 className="text-center">User Page</h1>
+      <div className='container'>
+        <PageHeader title='User Page' />
         <UserRoute />
       </div>
     </div>
   );
 };
 
-export default AboutPage;
+export default UserPage;

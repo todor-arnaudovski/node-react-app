@@ -12,13 +12,12 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
-// MODELS
-const User = require('./models/User');
-
-// CONTROLLERS
+// === CONTROLLERS ===
 const userRoutes = require('./routes/users');
+const bookRoutes = require('./routes/books');
 
 app.use('/api/users', userRoutes);
+app.use('/api/books', bookRoutes);
 
 // === ROUTES ===
 app.get('/api', (req, res) => {

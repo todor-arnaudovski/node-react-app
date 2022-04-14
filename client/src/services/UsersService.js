@@ -9,9 +9,9 @@ export async function getUsers() {
   }
 }
 
-export async function getUser(username) {
+export async function getUser(firstName) {
   try {
-    const response = await fetch(`/api/users/${username}`);
+    const response = await fetch(`/api/users/${firstName}`);
     const user = await response.json();
     return user;
   } catch (err) {
@@ -29,5 +29,6 @@ export async function createUser(userData) {
 
   const response = await fetch('/api/users', requestOptions);
   const user = await response.json();
-  console.log('Created user: ' + user);
-};
+  
+  return user;
+}

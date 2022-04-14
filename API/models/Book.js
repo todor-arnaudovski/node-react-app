@@ -5,19 +5,19 @@ const sequelize = new Sequelize({
   logging: false,
 });
 
-const User = sequelize.define('User', {
-  firstName: {
+const Book = sequelize.define('Book', {
+  title: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  lastName: {
+  author: {
     type: DataTypes.STRING,
   },
-  interests: {
-    type: DataTypes.STRING,
+  published: {
+    type: DataTypes.DATEONLY,
   },
 });
 
-User.sync();
+Book.sync();
 
-module.exports = User;
+module.exports = Book;

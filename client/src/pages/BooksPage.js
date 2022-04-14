@@ -1,21 +1,21 @@
 import Navbar from '../components/Navbar/Navbar';
 import PageHeader from '../components/Headers/PageHeader';
-import UsersRoute from '../routes/UsersRoute';
+import BooksRoute from '../routes/BooksRoute';
 import { Link } from 'react-router-dom';
 
-const UsersPage = () => {
+const BooksPage = () => {
   return (
     <div className='App'>
       <Navbar />
       <div className='container'>
-        <PageHeader title='Users Page' />
-        <UsersRoute />
-        <Link to='/users/new' className='btn btn-primary'>
-          Create new user
+        <PageHeader title='Books Page' />
+        <BooksRoute />
+        <Link to='/books/new' className='btn btn-primary'>
+          Create new book
         </Link>
       </div>
     </div>
   );
 };
 
-export default UsersPage;
+export default BooksPage;
