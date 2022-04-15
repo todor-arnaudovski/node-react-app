@@ -29,6 +29,20 @@ export async function createUser(userData) {
 
   const response = await fetch('/api/users', requestOptions);
   const user = await response.json();
-  
+
+  return user;
+}
+
+export async function deleteUser(userId) {
+  console.log('deletingUser with id: ' + userId);
+
+  const requestOptions = {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  const response = await fetch(`/api/users/${userId}`, requestOptions);
+  const user = await response.json();
+
   return user;
 }

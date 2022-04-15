@@ -25,7 +25,19 @@ module.exports.createUser = async (req, res) => {
     interests: req.body.interests,
   });
 
-  console.log(`Created new user: ${user.firstName} ${user.lastName}`);
+  res.send(user);
+};
+
+module.exports.deleteUser = async (req, res) => {
+  const id = req.params.id;
+  const user = await User.findOne({ where: { id: id } });
+
+  if (!user) {
+    console.log('User not found');
+    return res.send('User not found');
+  }
+
+  await user.destroy(user);
 
   res.send(user);
 };
