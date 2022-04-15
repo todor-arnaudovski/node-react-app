@@ -1,8 +1,11 @@
 import { Button } from 'react-bootstrap';
 import { deleteBook } from '../../services/BooksService';
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 const Book = ({ book }) => {
+  const { firstName, lastName } = book.User;
+
   const navigate = useNavigate();
 
   const deleteButtonHandler = () => {
@@ -19,6 +22,9 @@ const Book = ({ book }) => {
           <span className='text-success'>{book.author}</span>
         </h2>
         <p>Published: {book.published}</p>
+        <h3 className='h3'>
+          Owned by: {firstName} {lastName}
+        </h3>
         <Button variant='danger' onClick={deleteButtonHandler}>
           Delete book
         </Button>

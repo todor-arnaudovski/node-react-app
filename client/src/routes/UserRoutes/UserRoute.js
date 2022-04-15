@@ -14,7 +14,10 @@ const User = () => {
     });
   }, [params.firstName]);
 
-  return <UserComponent user={user} />;
+  return (
+    user &&
+    <UserComponent user={user} />
+  );
 };
 
 export default User;

@@ -1,4 +1,7 @@
-const Book = require('../models/Book');
+const { models } = require('../sequelize');
+
+const Book = models.Book;
+const User = models.User;
 
 module.exports.getBooks = async (req, res) => {
   const books = await Book.findAll();
@@ -8,7 +11,10 @@ module.exports.getBooks = async (req, res) => {
 
 module.exports.getBook = async (req, res) => {
   const title = req.params.title;
-  const book = await Book.findOne({ where: { title: title } });
+  const book = await Book.findOne({
+    where: { title: title },
+    include: User,
+  });
 
   if (!book) {
     console.log('book not found');
@@ -23,6 +29,7 @@ module.exports.createBook = async (req, res) => {
     title: req.body.title,
     author: req.body.author,
     published: req.body.published,
+    userId: req.body.userId,
   });
 
   res.send(book);

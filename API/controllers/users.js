@@ -1,4 +1,7 @@
-const User = require('../models/User');
+const { models } = require('../sequelize');
+
+const User = models.User;
+const Book = models.Book;
 
 module.exports.getUsers = async (req, res) => {
   const users = await User.findAll();
@@ -8,7 +11,10 @@ module.exports.getUsers = async (req, res) => {
 
 module.exports.getUser = async (req, res) => {
   const firstName = req.params.firstName;
-  const user = await User.findOne({ where: { firstName: firstName } });
+  const user = await User.findOne({
+    where: { firstName: firstName },
+    include: Book,
+  });
 
   if (!user) {
     console.log('User not found');

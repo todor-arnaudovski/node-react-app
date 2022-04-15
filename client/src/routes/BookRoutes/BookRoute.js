@@ -14,7 +14,10 @@ const Book = () => {
     });
   }, [params.title]);
 
-  return <BookComponent book={book} />;
+  return (
+    book &&
+    <BookComponent book={book} />
+  );
 };
 
 export default Book;
