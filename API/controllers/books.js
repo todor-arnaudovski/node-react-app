@@ -25,7 +25,19 @@ module.exports.createBook = async (req, res) => {
     published: req.body.published,
   });
 
-  console.log(`Created new book: ${book.title} by ${book.author}`);
+  res.send(book);
+};
+
+module.exports.deleteBook = async (req, res) => {
+  const id = req.params.id;
+  const book = await Book.findOne({ where: { id: id } });
+
+  if (!book) {
+    console.log('Book not found');
+    return res.send('Book not found');
+  }
+
+  await book.destroy(book);
 
   res.send(book);
 };

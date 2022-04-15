@@ -9,4 +9,7 @@ router.route('/')
 router.route('/:title')
   .get(books.getBook);
 
+router.route('/:id')
+  .delete(books.deleteBook);
+
 module.exports = router;

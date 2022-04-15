@@ -34,8 +34,6 @@ export async function createUser(userData) {
 }
 
 export async function deleteUser(userId) {
-  console.log('deletingUser with id: ' + userId);
-
   const requestOptions = {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },

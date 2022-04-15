@@ -32,4 +32,15 @@ export async function getBooks() {
     
     return book;
   }
+
+  export async function deleteBook(bookId) {
+    const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    };
   
+    const response = await fetch(`/api/books/${bookId}`, requestOptions);
+    const book = await response.json();
+  
+    return book;
+  }
