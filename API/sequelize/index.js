@@ -3,8 +3,9 @@ const { Sequelize } = require('sequelize');
 const sequelize = new Sequelize({
   dialect: 'sqlite',
   storage: './data/myAppDb.db',
-  logQueryParameters: true,
-  benchmark: true
+  // logQueryParameters: true,
+  // benchmark: true,
+  logging: false
 });
 
 const modelDefiners = [require('./models/User'), require('./models/Book')];

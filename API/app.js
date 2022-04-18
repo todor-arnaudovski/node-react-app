@@ -5,6 +5,10 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const sequelize = require('./sequelize');
 
+// Seeders
+// const seedUsers = require('./data/seedUsers');
+// const seedBooks = require('./data/seedBooks');
+
 const corsOptions = {
   origin: 'http://localhost:3000',
   optionsSuccessStatus: 200,
@@ -39,6 +43,10 @@ const init = async () => {
     console.log(e.message);
     process.exit(1);
   }
+
+  // Seed database
+  // seedUsers();
+  // seedBooks();
 
   app.listen(port, () => {
     console.log(`App listening on port ${port}`);
