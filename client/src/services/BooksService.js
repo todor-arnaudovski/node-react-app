@@ -9,9 +9,9 @@ export async function getBooks() {
     }
   }
   
-  export async function getBook(title) {
+  export async function getBook(url) {
     try {
-      const response = await fetch(`/api/books/${title}`);
+      const response = await fetch(`/api/books/${url}`);
       const book = await response.json();
       return book;
     } catch (err) {

@@ -9,10 +9,10 @@ const UsersPage = () => {
       <Navbar />
       <div className='container'>
         <PageHeader title='Users Page' />
-        <UsersRoute />
-        <Link to='/users/new' className='btn btn-primary'>
+        <Link to='/users/new' className='btn btn-primary mb-3'>
           Create new user
         </Link>
+        <UsersRoute />
       </div>
     </div>
   );

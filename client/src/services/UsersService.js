@@ -9,9 +9,9 @@ export async function getUsers() {
   }
 }
 
-export async function getUser(firstName) {
+export async function getUser(url) {
   try {
-    const response = await fetch(`/api/users/${firstName}`);
+    const response = await fetch(`/api/users/${url}`);
     const user = await response.json();
     return user;
   } catch (err) {

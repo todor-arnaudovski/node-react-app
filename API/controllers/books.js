@@ -1,50 +1,70 @@
 const { models } = require('../sequelize');
+const { createUrl } = require('../helpers');
 
 const Book = models.Book;
 const User = models.User;
 
 module.exports.getBooks = async (req, res) => {
-  const books = await Book.findAll();
+  try {
+    const books = await Book.findAll({
+      include: User,
+    });
 
-  res.send(books);
+    res.send(books);
+  } catch (err) {
+    console.log(err.message);
+    res.sedn(err.message);
+  }
 };
 
 module.exports.getBook = async (req, res) => {
-  const title = req.params.title;
-  const book = await Book.findOne({
-    where: { title: title },
-    include: User,
-  });
+  const url = req.params.url;
 
-  if (!book) {
-    console.log('book not found');
-    return res.send('book not found');
+  try {
+    const book = await Book.findOne({
+      where: { url: url },
+      include: User,
+    });
+
+    if (!book) throw new Error('Book not found.');
+
+    res.send(book);
+  } catch (err) {
+    console.log(err.message);
+    res.send(err.message);
   }
-
-  res.send(book);
 };
 
 module.exports.createBook = async (req, res) => {
-  const book = await Book.create({
-    title: req.body.title,
-    author: req.body.author,
-    published: req.body.published,
-    userId: req.body.userId,
-  });
+  try {
+    const book = await Book.create({
+      title: req.body.title,
+      url: createUrl(req.body.title),
+      author: req.body.author,
+      published: req.body.published,
+      userId: req.body.userId,
+    });
 
-  res.send(book);
+    res.send(book);
+  } catch (err) {
+    console.log(err.message);
+    res.send(err.message);
+  }
 };
 
 module.exports.deleteBook = async (req, res) => {
   const id = req.params.id;
-  const book = await Book.findOne({ where: { id: id } });
 
-  if (!book) {
-    console.log('Book not found');
-    return res.send('Book not found');
+  try {
+    const book = await Book.findOne({ where: { id: id } });
+
+    if (!book) throw new Error('Book not found.');
+
+    await book.destroy(book);
+
+    res.send(book);
+  } catch (err) {
+    console.log(err.message);
+    res.send(err.message);
   }
-
-  await book.destroy(book);
-
-  res.send(book);
 };

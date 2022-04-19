@@ -9,10 +9,10 @@ const BooksPage = () => {
       <Navbar />
       <div className='container'>
         <PageHeader title='Books Page' />
-        <BooksRoute />
-        <Link to='/books/new' className='btn btn-primary'>
+        <Link to='/books/new' className='btn btn-primary mb-4'>
           Create new book
         </Link>
+        <BooksRoute />
       </div>
     </div>
   );

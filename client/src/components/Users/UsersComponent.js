@@ -1,4 +1,4 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 
 const Users = ({ users }) => {
@@ -7,10 +7,10 @@ const Users = ({ users }) => {
       <tr key={user.id}>
         <td>{user.id}</td>
         <td>
-          <Link to={`/users/${user.firstName}`}>{user.firstName}</Link>
+          <Link to={`/users/${user.url}`}>{user.firstName}</Link>
         </td>
         <td>{user.lastName}</td>
-        <td>3</td>
+        <td>{user.Books.length > 0 ? user.Books.length : 'None'}</td>
       </tr>
     );
   });
@@ -23,12 +23,11 @@ const Users = ({ users }) => {
             <th>#</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Rented Movies</th>
+            <th>Books Owned</th>
           </tr>
         </thead>
         <tbody>{usersRows}</tbody>
       </Table>
-      <Outlet />
     </div>
   ) : (
     <h2 className='mb-4'>No users</h2>

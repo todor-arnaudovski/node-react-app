@@ -16,10 +16,10 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="users" element={<UsersPage />} />
-        <Route path="users/:firstName" element={<UserPage />} />
+        <Route path="users/:url" element={<UserPage />} />
         <Route path="users/new" element={<CreateUserPage />} />
         <Route path="books" element={<BooksPage />} />
-        <Route path="books/:title" element={<BookPage />} />
+        <Route path="books/:url" element={<BookPage />} />
         <Route path="books/new" element={<CreateBookPage />} />
       </Routes>
     </BrowserRouter>

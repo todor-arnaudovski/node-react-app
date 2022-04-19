@@ -6,7 +6,7 @@ router.route('/')
   .get(books.getBooks)
   .post(books.createBook);
 
-router.route('/:title')
+router.route('/:url')
   .get(books.getBook);
 
 router.route('/:id')

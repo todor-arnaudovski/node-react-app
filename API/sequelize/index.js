@@ -3,9 +3,9 @@ const { Sequelize } = require('sequelize');
 const sequelize = new Sequelize({
   dialect: 'sqlite',
   storage: './data/myAppDb.db',
-  // logQueryParameters: true,
-  // benchmark: true,
-  logging: false
+  logQueryParameters: true,
+  benchmark: true,
+  logging: false,
 });
 
 const modelDefiners = [require('./models/User'), require('./models/Book')];
@@ -20,7 +20,7 @@ User.hasMany(Book, {
   foreignKey: 'userId',
 });
 Book.belongsTo(User, {
-  foreignKey: 'userId'
+  foreignKey: 'userId',
 });
 
 sequelize.sync();

@@ -14,7 +14,7 @@ const HomePage = () => {
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/about">About</Nav.Link>
             <Nav.Link as={Link} to="/users">Users</Nav.Link>
-            <Nav.Link as={Link} to="/Books">Books</Nav.Link>
+            <Nav.Link as={Link} to="/books">Books</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

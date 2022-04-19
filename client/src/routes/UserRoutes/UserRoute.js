@@ -9,10 +9,10 @@ const User = () => {
   const params = useParams();
 
   useEffect(() => {
-    getUser(params.firstName).then((user) => {
+    getUser(params.url).then((user) => {
       setUser(user);
     });
-  }, [params.firstName]);
+  }, [params.url]);
 
   return (
     user &&

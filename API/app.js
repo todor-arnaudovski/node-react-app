@@ -5,9 +5,15 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const sequelize = require('./sequelize');
 
-// Seeders
-// const seedUsers = require('./data/seedUsers');
-// const seedBooks = require('./data/seedBooks');
+const seedDatabase = () => {
+  // Seeders
+  const seedUsers = require('./data/seedUsers');
+  const seedBooks = require('./data/seedBooks');
+
+  // Seed database
+  seedUsers();
+  seedBooks();
+};
 
 const corsOptions = {
   origin: 'http://localhost:3000',
@@ -37,19 +43,17 @@ app.get('*', (req, res) => {
 const init = async () => {
   try {
     await sequelize.authenticate();
-    console.log('Connection to database successful');
+    console.log('\u2713 Connection to database successful');
   } catch (e) {
     console.log('Unable to connect to database');
     console.log(e.message);
     process.exit(1);
   }
 
-  // Seed database
-  // seedUsers();
-  // seedBooks();
+  // seedDatabase();
 
   app.listen(port, () => {
-    console.log(`App listening on port ${port}`);
+    console.log(`\n \u001b[1;32m === APP IS RUNNING ON PORT ${port} === \u001b[0m \n`);
   });
 };
 

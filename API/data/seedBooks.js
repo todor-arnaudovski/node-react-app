@@ -1,33 +1,32 @@
 const sequelize = require('../sequelize');
-const bookData = require('./bookSeedData.json');
+const bookData = require('./seedData/bookSeedData.json');
+const { createUrl, capitalize } = require('../helpers/');
 
 const seedBooks = async () => {
   console.log(
-    'Will rewrite the SQLite example database, adding some dummy data.'
+    '\u001b[1;34m Seeding book data. \u001b[0m'
   );
 
   await sequelize.sync({ force: true });
 
   for (let book of bookData) {
-    const bookTitleArr = book.title.split(' ');
-    const bookTitleArrCap = []
+    try {
+      const publishedDate = new Date(book.published);
 
-    for (let word of bookTitleArr) {
-      const wordCap = word.charAt(0).toUpperCase() + word.slice(1);
-      bookTitleArrCap.push(wordCap);
+      const newBook = await sequelize.models.Book.build({
+        title: capitalize(book.title),
+        url: createUrl(book.title),
+        author: book.author,
+        published: publishedDate,
+        userId: book.userId,
+      });
+
+      console.log(capitalize(book.title));
+
+      newBook.save();
+    } catch (err) {
+      console.log(err.message);
     }
-    
-    const bookTitleCap = bookTitleArrCap.join(' ');
-
-    const newBook = await sequelize.models.Book.build({
-      title: bookTitleCap,
-      author: book.author,
-      published: book.published,
-      userId: book.userId,
-    });
-
-    newBook.save();
-    console.log(`${newBook.title} was saved to the database!`);
   }
 };
 

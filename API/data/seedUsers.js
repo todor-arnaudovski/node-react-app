@@ -1,22 +1,27 @@
 const sequelize = require('../sequelize');
-const userData = require('./userSeedData.json');
+const userData = require('./seedData/userSeedData.json');
+const { capitalize, createUrl } = require('../helpers');
 
 const seedUsers = async () => {
-  console.log(
-    'Will rewrite the SQLite example database, adding some dummy data.'
-  );
+  console.log('\u001b[1;34m Seeding user data. \u001b[0m');
 
   await sequelize.sync({ force: true });
 
   for (let user of userData) {
-    const newUser = await sequelize.models.User.build({
-      firstName: user.firstName,
-      lastName: user.lastName,
-      interests: user.interests,
-    });
+    try {
+      const firstAndLastName = `${user.firstName} ${user.lastName}`;
 
-    newUser.save();
-    console.log(`${newUser.firstName} was saved to the database!`)
+      const newUser = await sequelize.models.User.build({
+        firstName: capitalize(user.firstName),
+        url: createUrl(firstAndLastName),
+        lastName: capitalize(user.lastName),
+        interests: user.interests,
+      });
+
+      newUser.save();
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 };
 

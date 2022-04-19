@@ -6,8 +6,8 @@ router.route('/')
   .get(users.getUsers)
   .post(users.createUser);
 
-router.route('/:firstName')
-  .get(users.getUser)
+router.route('/:url')
+  .get(users.getUser);
 
 router.route('/:id')
   .delete(users.deleteUser);

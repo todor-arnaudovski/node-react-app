@@ -1,4 +1,4 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 
 const Books = (props) => {
@@ -8,11 +8,12 @@ const Books = (props) => {
       <tr key={book.id}>
         <td>{book.id}</td>
         <td>
-          <Link to={`/books/${book.title}`}>
-            {book.title}
-          </Link>
+          <Link to={`/books/${book.url}`}>{book.title}</Link>
         </td>
         <td>{book.author}</td>
+        <td>
+          <Link to={`/users/${book.User.url}`}>{book.User.firstName}</Link>
+        </td>
         <td>{book.published}</td>
       </tr>
     );
@@ -26,12 +27,12 @@ const Books = (props) => {
             <th>#</th>
             <th>Title</th>
             <th>Author</th>
+            <th>Owned by:</th>
             <th>Published</th>
           </tr>
         </thead>
         <tbody>{booksRows}</tbody>
       </Table>
-      <Outlet />
     </div>
   );
 };

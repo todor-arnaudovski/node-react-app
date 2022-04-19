@@ -9,10 +9,10 @@ const Book = () => {
   const params = useParams();
 
   useEffect(() => {
-    getBook(params.title).then((book) => {
+    getBook(params.url).then((book) => {
       setBook(book);
     });
-  }, [params.title]);
+  }, [params.url]);
 
   return (
     book &&

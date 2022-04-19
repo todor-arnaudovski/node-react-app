@@ -1,10 +1,9 @@
 import { Button } from 'react-bootstrap';
 import { deleteBook } from '../../services/BooksService';
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Book = ({ book }) => {
-  const { firstName, lastName } = book.User;
+  let user = book.User;
 
   const navigate = useNavigate();
 
@@ -22,9 +21,15 @@ const Book = ({ book }) => {
           <span className='text-success'>{book.author}</span>
         </h2>
         <p>Published: {book.published}</p>
-        <h3 className='h3'>
-          Owned by: {firstName} {lastName}
-        </h3>
+        {user ? (
+          <span className={'d-block mb-3 text-danger'}>
+            This book is owned by: <Link to={`/users/${user.url}`}>{user.firstName} {user.lastName}</Link>
+          </span>
+        ) : (
+          <span className={'d-block mb-3 text-success'}>
+            This book is available!
+          </span>
+        )}
         <Button variant='danger' onClick={deleteButtonHandler}>
           Delete book
         </Button>
