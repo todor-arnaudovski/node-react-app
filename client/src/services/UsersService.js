@@ -33,6 +33,20 @@ export async function createUser(userData) {
   return user;
 }
 
+export async function updateUser(userData, userUrl) {
+  const requestOptions = {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(userData),
+  };
+
+  const response = await fetch(`/api/users/${userUrl}`, requestOptions);
+  const user = await response.json();
+
+  return user;
+  // console.log(`Updating user: ${JSON.stringify(userData)}`)
+}
+
 export async function deleteUser(url) {
   const requestOptions = {
     method: 'DELETE',

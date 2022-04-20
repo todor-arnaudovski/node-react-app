@@ -1,6 +1,6 @@
 import Navbar from '../../components/Navbar/Navbar';
 import PageHeader from '../../components/Headers/PageHeader';
-import UsersRoute from '../../routes/UserRoutes/UsersRoute';
+import Users from '../../routes/UserRoutes/Users';
 import { Link } from 'react-router-dom';
 
 const UsersPage = () => {
@@ -12,7 +12,7 @@ const UsersPage = () => {
         <Link to='/users/new' className='btn btn-primary mb-3'>
           Create new user
         </Link>
-        <UsersRoute />
+        <Users />
       </div>
     </div>
   );

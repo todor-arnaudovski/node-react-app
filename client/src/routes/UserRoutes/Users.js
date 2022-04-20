@@ -1,7 +1,17 @@
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { getUsers } from '../../services/UsersService';
 
-const Users = ({ users }) => {
+const Users = () => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    getUsers().then((users) => {
+      setUsers(users);
+    });
+  }, []);
+
   const usersRows = users.map((user) => {
     return (
       <tr key={user.id}>

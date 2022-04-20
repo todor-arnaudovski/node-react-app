@@ -6,7 +6,7 @@ router.route('/')
   .get(books.getBooks)
   .post(books.createBook);
 
-router.route('/:url')
+router.route('/:id')
   .get(books.getBook)
   .put(books.updateBook)
   .patch(books.updateBookUser)

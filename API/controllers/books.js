@@ -31,11 +31,11 @@ const getBooks = async (req, res) => {
 };
 
 const getBook = async (req, res) => {
-  const url = req.params.url;
+  const id = req.params.id;
 
   try {
     const book = await Book.findOne({
-      where: { url: url },
+      where: { id: id },
       include: User,
     });
 
@@ -72,10 +72,10 @@ const createBook = async (req, res) => {
 };
 
 const updateBook = async (req, res) => {
-  const url = req.params.url;
+  const id = req.params.id;
 
   try {
-    const book = await Book.findOne({ where: { url: url } });
+    const book = await Book.findOne({ where: { id: id } });
 
     if (!book) throw new Error('book not found.')
 
@@ -119,10 +119,10 @@ const updateBookUser = async (req, res) => {
 };
 
 const deleteBook = async (req, res) => {
-  const url = req.params.url;
+  const id = req.params.id;
 
   try {
-    const book = await Book.findOne({ where: { url: url } });
+    const book = await Book.findOne({ where: { id: id } });
 
     if (!book) throw new Error('Book not found.');
 

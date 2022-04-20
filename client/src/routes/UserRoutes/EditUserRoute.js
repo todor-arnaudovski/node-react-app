@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserFormComponent from '../../components/Users/UserFormComponent';
-import { createUser } from '../../services/UsersService';
+import { updateUser } from '../../services/UsersService';
 
-const CreateUser = () => {
-  const [inputs, setInputs] = useState({});
+const CreateUser = ({ user }) => {
+  const [inputs, setInputs] = useState({
+    firstName: user.firstName,
+    lastName: user.lastName,
+    interests: user.interests,
+  });
+  const [userUrl, setUserUrl] = useState(user.url);
 
   let navigate = useNavigate();
 
@@ -26,16 +31,20 @@ const CreateUser = () => {
       interests: inputs.interests,
     };
 
-    createUser(userData);
+    updateUser(userData, userUrl);
 
-    navigate('../users', { replace: true });
+    setUserUrl(userUrl);
+    console.log(userUrl)
+
+    navigate(`../users/${userUrl}`, { replace: true });
   };
   return (
     <UserFormComponent
       handleChange={handleChange}
       handleSubmit={handleSubmit}
       inputs={inputs}
-      btnText='Create User'
+      btnText='Save changes'
+      initialValues={user}
     />
   );
 };

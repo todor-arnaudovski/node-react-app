@@ -1,36 +1,6 @@
-import { useState } from 'react';
-import { createUser } from '../../services/UsersService';
-import { useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 
-const CreateUserComponent = () => {
-  const [inputs, setInputs] = useState({});
-
-  let navigate = useNavigate();
-
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setInputs((values) => ({
-      ...values,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const userData = {
-      firstName: inputs.firstName,
-      lastName: inputs.lastName,
-      interests: inputs.interests,
-    };
-
-    createUser(userData);
-
-    navigate('../users', { replace: true });
-  };
-
+const UserFormComponent = ({ handleChange, handleSubmit, inputs, btnText }) => {
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group className='mb-3' controlId='firstName'>
@@ -65,10 +35,10 @@ const CreateUserComponent = () => {
         />
       </Form.Group>
       <Button variant='primary' type='submit'>
-        Create user
+        {btnText}
       </Button>
     </Form>
   );
 };
 
-export default CreateUserComponent;
+export default UserFormComponent;

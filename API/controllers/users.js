@@ -17,11 +17,11 @@ const getUsers = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
-  const url = req.params.url;
+  const id = req.params.id;
 
   try {
     const user = await User.findOne({
-      where: { url: url },
+      where: { id: id },
       include: Book,
     });
 
@@ -29,7 +29,7 @@ const getUser = async (req, res) => {
 
     res.send(user);
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
     res.send(err.message);
   }
 };
@@ -58,10 +58,10 @@ const createUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const url = req.params.url;
+  const id = req.params.id;
 
   try {
-    const user = await User.findOne({ where: { url: url } });
+    const user = await User.findOne({ where: { id: id } });
 
     if (!user) throw new Error('User not found.')
 
@@ -86,10 +86,10 @@ const updateUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  const url = req.params.url;
+  const id = req.params.id;
 
   try {
-    const user = await User.findOne({ where: { url: url } });
+    const user = await User.findOne({ where: { id: id } });
 
     if (!user) throw new Error('User not found');
 

@@ -7,7 +7,7 @@ const CreateUserPage = () => {
     <div className='App'>
       <Navbar />
       <div className='container'>
-        <PageHeader title='Create User Page' />
+        <PageHeader title='Create User' />
         <CreateUserRoute />
       </div>
     </div>
