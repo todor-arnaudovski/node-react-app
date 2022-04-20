@@ -8,15 +8,27 @@ const User = (sequelize) => {
       url: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+        unique: {
+          msg: 'User already exists'
+        }
       },
       firstName: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: 'First name cannot be null',
+          },
+        },
       },
       lastName: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: 'Last name cannot be null',
+          },
+        },
       },
       interests: {
         type: DataTypes.STRING,
@@ -35,19 +47,6 @@ const User = (sequelize) => {
     const firstAndLastName = `${this.firstName} ${this.lastName}`;
     this.url = createUrl(firstAndLastName);
   };
-
-  const validateFields = (user) => {
-    if (!user.firstName) throw new Error('First name can not be empty.');
-    if (!user.lastName) throw new Error('Last name can not be empty.');
-  };
-
-  UserModel.beforeCreate((user) => {
-    validateFields(user);
-  });
-
-  UserModel.beforeUpdate((user) => {
-    validateFields(user);
-  });
 };
 
 module.exports = User;

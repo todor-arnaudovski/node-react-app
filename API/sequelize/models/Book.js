@@ -8,15 +8,27 @@ const Book = (sequelize) => {
       url: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+        unique: {
+          msg: 'Book already exists'
+        }
       },
       title: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: 'Title cannot be empty',
+          },
+        },
       },
       author: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: 'Author cannot be empty',
+          },
+        },
       },
       published: {
         type: DataTypes.DATEONLY,
@@ -34,19 +46,6 @@ const Book = (sequelize) => {
   BookModel.prototype.createUrl = function () {
     this.url = createUrl(this.title);
   };
-
-  const validateFields = (book) => {
-    if (!book.title) throw new Error('Title can not be empty.');
-    if (!book.author) throw new Error('Author name can not be empty.');
-  };
-
-  BookModel.beforeCreate((book) => {
-    validateFields(book);
-  });
-
-  BookModel.beforeUpdate((book) => {
-    validateFields(book);
-  });
 };
 
 module.exports = Book;

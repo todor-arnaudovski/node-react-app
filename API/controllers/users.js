@@ -25,7 +25,7 @@ const getUser = async (req, res) => {
       include: Book,
     });
 
-    if (!user) throw new Error('User not found.');
+    if (!user) throw new Error('User not found');
 
     res.send(user);
   } catch (err) {
@@ -91,7 +91,7 @@ const deleteUser = async (req, res) => {
   try {
     const user = await User.findOne({ where: { url: url } });
 
-    if (!user) throw new Error('User not found.');
+    if (!user) throw new Error('User not found');
 
     await user.destroy(user);
 
