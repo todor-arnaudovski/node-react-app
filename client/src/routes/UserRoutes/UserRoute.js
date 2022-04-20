@@ -15,8 +15,11 @@ const User = () => {
   }, [params.url]);
 
   return (
-    user &&
-    <UserComponent user={user} />
+    user && (
+      <div>
+        <UserComponent user={user} />
+      </div>
+    )
   );
 };
 

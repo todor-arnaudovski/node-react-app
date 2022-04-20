@@ -1,4 +1,6 @@
 const capitalize = (term) => {
+  if (!term) throw new Error('Helpers: trying to capitalize empty string');
+
   const termArr = term.split(' ');
   const termArrCapitalized = [];
 
@@ -11,6 +13,8 @@ const capitalize = (term) => {
 };
 
 const createUrl = (term) => {
+  if (!term) throw new Error('Helpers: trying to crete URL from empty string');
+
   const slug = term
     .split(' ')
     .map((word) => {

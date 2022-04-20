@@ -8,7 +8,7 @@ const Book = ({ book }) => {
   const navigate = useNavigate();
 
   const deleteButtonHandler = () => {
-    deleteBook(book.id);
+    deleteBook(book.url);
 
     navigate('../books', { replace: true });
   };

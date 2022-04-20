@@ -19,6 +19,7 @@ const seedUsers = async () => {
       });
 
       newUser.save();
+      console.log(`USER: ${newUser.firstName} >>> created`)
     } catch (err) {
       console.log(err.message);
     }

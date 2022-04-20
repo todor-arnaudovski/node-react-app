@@ -53,7 +53,9 @@ const init = async () => {
   // seedDatabase();
 
   app.listen(port, () => {
-    console.log(`\n \u001b[1;32m === APP IS RUNNING ON PORT ${port} === \u001b[0m \n`);
+    console.log(
+      `\n \u001b[1;32m === APP IS RUNNING ON PORT ${port} === \u001b[0m \n _`
+    );
   });
 };
 

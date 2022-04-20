@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 
-const Books = (props) => {
-  const books = props.books;
+const Books = ({ books }) => {
   const booksRows = books.map((book) => {
     return (
       <tr key={book.id}>
@@ -11,10 +10,15 @@ const Books = (props) => {
           <Link to={`/books/${book.url}`}>{book.title}</Link>
         </td>
         <td>{book.author}</td>
-        <td>
-          <Link to={`/users/${book.User.url}`}>{book.User.firstName}</Link>
-        </td>
         <td>{book.published}</td>
+        { book.User ?
+          <td>
+            <Link to={`/users/${book.User.url}`}>
+              {book.User.firstName} {book.User.lastName}
+            </Link>
+          </td> :
+          <td className='text-success'>Available</td>
+        }
       </tr>
     );
   });
@@ -27,8 +31,8 @@ const Books = (props) => {
             <th>#</th>
             <th>Title</th>
             <th>Author</th>
-            <th>Owned by:</th>
             <th>Published</th>
+            <th>Owned by</th>
           </tr>
         </thead>
         <tbody>{booksRows}</tbody>

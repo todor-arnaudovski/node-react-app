@@ -1,15 +1,16 @@
 const { DataTypes } = require('sequelize');
-const { createUrl } = require('../../helpers');
+const { createUrl, capitalize } = require('../../helpers');
 
 const Book = (sequelize) => {
   const BookModel = sequelize.define(
     'Book',
     {
-      title: {
+      url: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
       },
-      url: {
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -25,14 +26,26 @@ const Book = (sequelize) => {
     { timestamps: false }
   );
 
-  BookModel.beforeValidate(({ title, author }) => {
-    if (!title) throw new Error('Title name can not be empty.');
+  BookModel.prototype.capitalize = function () {
+    this.title = capitalize(this.title);
+    this.author = capitalize(this.author);
+  };
 
-    if (!author) throw new Error('Author name can not be empty.');
-  });
+  BookModel.prototype.createUrl = function () {
+    this.url = createUrl(this.title);
+  };
+
+  const validateFields = (book) => {
+    if (!book.title) throw new Error('Title can not be empty.');
+    if (!book.author) throw new Error('Author name can not be empty.');
+  };
 
   BookModel.beforeCreate((book) => {
-    book.url = createUrl(book.title);
+    validateFields(book);
+  });
+
+  BookModel.beforeUpdate((book) => {
+    validateFields(book);
   });
 };
 

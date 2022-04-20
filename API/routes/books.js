@@ -7,9 +7,9 @@ router.route('/')
   .post(books.createBook);
 
 router.route('/:url')
-  .get(books.getBook);
-
-router.route('/:id')
+  .get(books.getBook)
+  .put(books.updateBook)
+  .patch(books.updateBookUser)
   .delete(books.deleteBook);
 
 module.exports = router;

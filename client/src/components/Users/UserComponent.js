@@ -1,6 +1,9 @@
 import { Button } from 'react-bootstrap';
 import { deleteUser } from '../../services/UsersService';
 import { Link, useNavigate } from 'react-router-dom';
+import AddBookComponent from '../Users/AddBookComponent';
+import { useState, useEffect } from 'react';
+import { getBooks } from '../../services/BooksService';
 
 const User = ({ user }) => {
   const books = user.Books;
@@ -18,10 +21,22 @@ const User = ({ user }) => {
   const navigate = useNavigate();
 
   const deleteButtonHandler = () => {
-    deleteUser(user.id);
+    deleteUser(user.url);
 
     navigate('../users', { replace: true });
   };
+
+  const addBookHandler = () => {
+    console.log('Will toggle add book component');
+  };
+
+  const [availableBooks, setAvailableBooks] = useState(null);
+
+  useEffect(() => {
+    getBooks(true).then((books) => {
+      setAvailableBooks(books);
+    });
+  }, []);
 
   return (
     user && (
@@ -37,9 +52,21 @@ const User = ({ user }) => {
         ) : (
           <p className='text-danger'>This user does not have any books</p>
         )}
+        <div className='mb-4'>
+        <Button variant='primary' className='me-3' onClick={addBookHandler}>
+          Add book
+        </Button>
         <Button variant='danger' onClick={deleteButtonHandler}>
           Delete user
         </Button>
+        </div>
+        {availableBooks ? (
+          <AddBookComponent availableBooks={availableBooks} userId={user.id}/>
+        ) : (
+          <h3 className='text-danger'>
+            Currently there are no available books.
+          </h3>
+        )}
       </div>
     )
   );

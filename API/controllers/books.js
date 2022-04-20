@@ -1,10 +1,23 @@
 const { models } = require('../sequelize');
-const { createUrl } = require('../helpers');
 
 const Book = models.Book;
 const User = models.User;
 
-module.exports.getBooks = async (req, res) => {
+const getBooks = async (req, res) => {
+  if (req.query.available) {
+    try {
+      const books = await Book.findAll({
+        where: { userId: null },
+      });
+
+      res.send(books);
+    } catch (err) {
+      console.log(err.message);
+      res.send(err.message);
+    }
+    return;
+  }
+
   try {
     const books = await Book.findAll({
       include: User,
@@ -13,11 +26,11 @@ module.exports.getBooks = async (req, res) => {
     res.send(books);
   } catch (err) {
     console.log(err.message);
-    res.sedn(err.message);
+    res.send(err.message);
   }
 };
 
-module.exports.getBook = async (req, res) => {
+const getBook = async (req, res) => {
   const url = req.params.url;
 
   try {
@@ -35,15 +48,21 @@ module.exports.getBook = async (req, res) => {
   }
 };
 
-module.exports.createBook = async (req, res) => {
+const createBook = async (req, res) => {
   try {
-    const book = await Book.create({
+    const book = await Book.build({
       title: req.body.title,
-      url: createUrl(req.body.title),
       author: req.body.author,
       published: req.body.published,
       userId: req.body.userId,
     });
+
+    if (book) {
+      book.createUrl();
+      book.capitalize();
+    }
+
+    await book.save();
 
     res.send(book);
   } catch (err) {
@@ -52,11 +71,58 @@ module.exports.createBook = async (req, res) => {
   }
 };
 
-module.exports.deleteBook = async (req, res) => {
-  const id = req.params.id;
+const updateBook = async (req, res) => {
+  const url = req.params.url;
 
   try {
-    const book = await Book.findOne({ where: { id: id } });
+    const book = await Book.findOne({ where: { url: url } });
+
+    if (!book) throw new Error('book not found.')
+
+    book.set({
+      title: req.body.title,
+      author: req.body.author,
+      published: req.body.published,
+    });
+
+    if (book) {
+      book.createUrl();
+      book.capitalize();
+    }
+
+    await book.save();
+
+    res.send(book);
+  } catch (err) {
+    console.log(err.message);
+    res.send(err.message);
+  }
+};
+
+const updateBookUser = async (req, res) => {
+  const bookId = req.body.bookId;
+  const userId = req.body.userId;
+
+  try {
+    if (!bookId || !userId) throw new Error('Id cannot be null.');
+
+    const bookToAddUserTo = await Book.update(
+      { userId: userId },
+      { where: { id: bookId } }
+    );
+
+    res.send(bookToAddUserTo);
+  } catch (err) {
+    console.log(err.message);
+    res.send(err.message);
+  }
+};
+
+const deleteBook = async (req, res) => {
+  const url = req.params.url;
+
+  try {
+    const book = await Book.findOne({ where: { url: url } });
 
     if (!book) throw new Error('Book not found.');
 
@@ -67,4 +133,13 @@ module.exports.deleteBook = async (req, res) => {
     console.log(err.message);
     res.send(err.message);
   }
+};
+
+module.exports = {
+  getBooks,
+  getBook,
+  createBook,
+  updateBook,
+  updateBookUser,
+  deleteBook,
 };

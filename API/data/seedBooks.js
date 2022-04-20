@@ -21,9 +21,8 @@ const seedBooks = async () => {
         userId: book.userId,
       });
 
-      console.log(capitalize(book.title));
-
       newBook.save();
+      console.log(`BOOK: ${newBook.title} >>> created`)
     } catch (err) {
       console.log(err.message);
     }

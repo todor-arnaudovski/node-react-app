@@ -32,7 +32,7 @@
     "title": "exercitation ad ex",
     "author": "Dorsey Marks",
     "published": "Fri Feb 22 1991 15:09:33 GMT+0100 (Central European Standard Time)",
-    "userId": 9
+    "userId": null
   },
   {
     "id": 6,
@@ -95,7 +95,7 @@
     "title": "cupidatat minim nulla",
     "author": "Finley Britt",
     "published": "Sat Apr 13 1991 08:31:17 GMT+0200 (Central European Summer Time)",
-    "userId": 13
+    "userId": null
   },
   {
     "id": 15,
@@ -130,7 +130,7 @@
     "title": "ullamco enim tempor",
     "author": "Merritt Young",
     "published": "Tue Sep 12 2000 20:52:59 GMT+0200 (Central European Summer Time)",
-    "userId": 2
+    "userId": null
   },
   {
     "id": 20,
@@ -172,7 +172,7 @@
     "title": "proident officia consequat",
     "author": "Snow Evans",
     "published": "Mon Feb 20 1984 02:31:44 GMT+0100 (Central European Standard Time)",
-    "userId": 11
+    "userId": null
   },
   {
     "id": 26,
@@ -242,7 +242,7 @@
     "title": "velit consequat in",
     "author": "Miller Little",
     "published": "Fri Apr 10 1970 15:42:31 GMT+0100 (Central European Standard Time)",
-    "userId": 12
+    "userId": null
   },
   {
     "id": 36,
