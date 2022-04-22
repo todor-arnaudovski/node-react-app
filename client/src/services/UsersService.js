@@ -9,9 +9,9 @@ export async function getUsers() {
   }
 }
 
-export async function getUser(url) {
+export async function getUser(id) {
   try {
-    const response = await fetch(`/api/users/${url}`);
+    const response = await fetch(`/api/users/${id}`);
     const user = await response.json();
     return user;
   } catch (err) {
@@ -33,28 +33,29 @@ export async function createUser(userData) {
   return user;
 }
 
-export async function updateUser(userData, userUrl) {
+export async function updateUser(userData, id) {
   const requestOptions = {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(userData),
   };
 
-  const response = await fetch(`/api/users/${userUrl}`, requestOptions);
+  const response = await fetch(`/api/users/${id}`, requestOptions);
   const user = await response.json();
 
   return user;
-  // console.log(`Updating user: ${JSON.stringify(userData)}`)
 }
 
-export async function deleteUser(url) {
+export async function deleteUser(id) {
   const requestOptions = {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
   };
 
-  const response = await fetch(`/api/users/${url}`, requestOptions);
+  const response = await fetch(`/api/users/${id}`, requestOptions);
   const user = await response.json();
 
   return user;
+  
+  
 }

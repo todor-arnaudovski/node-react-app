@@ -10,20 +10,25 @@ import { getBooks } from '../../services/BooksService';
 const User = () => {
   const [user, setUser] = useState(null);
   const [userBooks, setUserBooks] = useState([]);
+  const [availableBooks, setAvailableBooks] = useState(null);
 
   const params = useParams();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    getUser(params.url).then((user) => {
+    getUser(params.id).then((user) => {
       setUser(user);
       setUserBooks(user.Books);
     });
-  }, [params.url]);
+    
+    getBooks(true).then((books) => {
+      setAvailableBooks(books);
+    });
+  }, [params.id]);
 
   const deleteButtonHandler = () => {
-    deleteUser(user.url);
+    deleteUser(user.id);
 
     navigate('../users', { replace: true });
   };
@@ -31,14 +36,6 @@ const User = () => {
   const addBookHandler = () => {
     console.log('Will toggle add book component');
   };
-
-  const [availableBooks, setAvailableBooks] = useState(null);
-
-  useEffect(() => {
-    getBooks(true).then((books) => {
-      setAvailableBooks(books);
-    });
-  }, []);
 
   return (
     user && (

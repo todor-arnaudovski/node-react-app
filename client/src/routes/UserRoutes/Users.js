@@ -17,7 +17,7 @@ const Users = () => {
       <tr key={user.id}>
         <td>{user.id}</td>
         <td>
-          <Link to={`/users/${user.url}`}>{user.firstName}</Link>
+          <Link to={`/users/${user.id}`}>{user.firstName}</Link>
         </td>
         <td>{user.lastName}</td>
         <td>{user.Books.length > 0 ? user.Books.length : 'None'}</td>

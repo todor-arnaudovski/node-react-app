@@ -20,9 +20,9 @@ export async function getBooks(getAvailable = false) {
   }
 }
 
-export async function getBook(url) {
+export async function getBook(id) {
   try {
-    const response = await fetch(`/api/books/${url}`);
+    const response = await fetch(`/api/books/${id}`);
     const book = await response.json();
     return book;
   } catch (err) {
@@ -50,9 +50,9 @@ export async function createBook(bookData) {
 }
 
 export async function addSelectedBook(updateData) {
-  const { bookId } = updateData;
+  const { id } = updateData;
 
-  if (!bookId || !updateData.userId)
+  if (!id)
     return console.log('You must select a book.');
 
   const requestOptions = {
@@ -62,7 +62,7 @@ export async function addSelectedBook(updateData) {
   };
 
   try {
-    const response = await fetch(`/api/books/${bookId}`, requestOptions);
+    const response = await fetch(`/api/books/${id}`, requestOptions);
     const book = await response.json();
 
     return book;
@@ -72,14 +72,14 @@ export async function addSelectedBook(updateData) {
   }
 }
 
-export async function deleteBook(bookUrl) {
+export async function deleteBook(id) {
   const requestOptions = {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
   };
 
   try {
-    const response = await fetch(`/api/books/${bookUrl}`, requestOptions);
+    const response = await fetch(`/api/books/${id}`, requestOptions);
     const book = await response.json();
 
     return book;

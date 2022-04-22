@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="users" element={<UsersPage />} />
-        <Route path="users/:url" element={<UserPage />} />
+        <Route path="users/:id" element={<UserPage />} />
         <Route path="users/new" element={<CreateUserPage />} />
         <Route path="users/:id/edit" element={<EditUserPage />} />
         <Route path="books" element={<BooksPage />} />

@@ -4,6 +4,7 @@ const port = 8000;
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const sequelize = require('./sequelize');
+const rateLimit = require('express-rate-limit');
 
 const seedDatabase = () => {
   // Seeders
@@ -20,8 +21,14 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
+const apiRequestLimiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 2, // limit each IP to 2 requests per windowMs
+});
+
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
+app.use(apiRequestLimiter);
 
 // Controllers
 const userRoutes = require('./routes/users');

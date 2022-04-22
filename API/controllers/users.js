@@ -50,6 +50,8 @@ const createUser = async (req, res) => {
 
     await user.save();
 
+    console.log('User created');
+
     res.send(user);
   } catch (err) {
     console.log(err.message);

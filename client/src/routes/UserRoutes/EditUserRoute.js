@@ -9,7 +9,7 @@ const CreateUser = ({ user }) => {
     lastName: user.lastName,
     interests: user.interests,
   });
-  const [userUrl, setUserUrl] = useState(user.url);
+  const [userId, setUserId] = useState(user.id);
 
   let navigate = useNavigate();
 
@@ -31,12 +31,12 @@ const CreateUser = ({ user }) => {
       interests: inputs.interests,
     };
 
-    updateUser(userData, userUrl);
+    updateUser(userData, userId);
 
-    setUserUrl(userUrl);
-    console.log(userUrl)
+    setUserId(userId);
+    console.log(userId)
 
-    navigate(`../users/${userUrl}`, { replace: true });
+    navigate(`../users/${userId}`, { replace: true });
   };
   return (
     <UserFormComponent
