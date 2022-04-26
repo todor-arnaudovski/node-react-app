@@ -49,11 +49,23 @@ export async function createBook(bookData) {
   }
 }
 
+export async function updateBook(bookData, id) {
+  const requestOptions = {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(bookData),
+  };
+
+  const response = await fetch(`/api/books/${id}`, requestOptions);
+  const user = await response.json();
+
+  return user;
+}
+
 export async function addSelectedBook(updateData) {
   const { id } = updateData;
 
-  if (!id)
-    return console.log('You must select a book.');
+  if (!id) return console.log('You must select a book.');
 
   const requestOptions = {
     method: 'PATCH',

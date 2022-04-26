@@ -11,7 +11,7 @@ const Books = () => {
     });
   }, []);
 
-  return books.length > 0 && <BooksComponent books={books} />;
+  return books.length > 0 && <BooksComponent books={books} hasUserRow={true} />;
 };
 
 export default Books;

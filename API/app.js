@@ -24,7 +24,7 @@ const corsOptions = {
 
 const apiRequestLimiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
-  max: 20, // limit each IP to 2 requests per windowMs
+  max: 50, // limit each IP to 2 requests per windowMs
 });
 
 app.use(cors(corsOptions));

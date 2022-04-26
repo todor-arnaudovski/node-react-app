@@ -1,6 +1,6 @@
 import Navbar from '../../components/Navbar/Navbar';
 import PageHeader from '../../components/Headers/PageHeader';
-import User from '../../routes/UserRoutes/User';
+import UserRoute from '../../routes/UserRoutes/UserRoute';
 
 const UserPage = () => {
   return (
@@ -8,7 +8,7 @@ const UserPage = () => {
       <Navbar />
       <div className='container'>
         <PageHeader title='User Page' />
-        <User />
+        <UserRoute />
       </div>
     </div>
   );

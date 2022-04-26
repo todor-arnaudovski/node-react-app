@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import UserFormComponent from '../../components/Users/UserFormComponent';
 import { updateUser } from '../../services/UsersService';
 
-const CreateUser = ({ user }) => {
+const EditUserRoute = ({ user }) => {
   const [inputs, setInputs] = useState({
     firstName: user.firstName,
     lastName: user.lastName,
@@ -34,7 +34,6 @@ const CreateUser = ({ user }) => {
     updateUser(userData, userId);
 
     setUserId(userId);
-    console.log(userId)
 
     navigate(`../users/${userId}`, { replace: true });
   };
@@ -44,9 +43,8 @@ const CreateUser = ({ user }) => {
       handleSubmit={handleSubmit}
       inputs={inputs}
       btnText='Save changes'
-      initialValues={user}
     />
   );
 };
 
-export default CreateUser;
+export default EditUserRoute;

@@ -9,6 +9,7 @@ import EditUserPage from './pages/UserPages/EditUserPage';
 import BooksPage from './pages/BookPages/BooksPage';
 import BookPage from './pages/BookPages/BookPage';
 import CreateBookPage from './pages/BookPages/CreateBookPage';
+import EditBookPage from './pages/BookPages/EditBookPage';
 
 function App() {
   return (
@@ -21,8 +22,9 @@ function App() {
         <Route path="users/new" element={<CreateUserPage />} />
         <Route path="users/:id/edit" element={<EditUserPage />} />
         <Route path="books" element={<BooksPage />} />
-        <Route path="books/:url" element={<BookPage />} />
+        <Route path="books/:id" element={<BookPage />} />
         <Route path="books/new" element={<CreateBookPage />} />
+        <Route path="books/:id/edit" element={<EditBookPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -3,7 +3,7 @@ import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { getUsers } from '../../services/UsersService';
 
-const Users = () => {
+const UsersRoute = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -17,9 +17,10 @@ const Users = () => {
       <tr key={user.id}>
         <td>{user.id}</td>
         <td>
-          <Link to={`/users/${user.id}`}>{user.firstName}</Link>
+          <Link to={`/users/${user.id}`}>
+            {user.firstName} {user.lastName}
+          </Link>
         </td>
-        <td>{user.lastName}</td>
         <td>{user.Books.length > 0 ? user.Books.length : 'None'}</td>
       </tr>
     );
@@ -31,8 +32,7 @@ const Users = () => {
         <thead>
           <tr>
             <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Name</th>
             <th>Books Owned</th>
           </tr>
         </thead>
@@ -44,4 +44,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default UsersRoute;

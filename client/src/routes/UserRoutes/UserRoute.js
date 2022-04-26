@@ -7,7 +7,7 @@ import BooksComponent from '../../components/Books/BooksComponent';
 import { getUser, deleteUser } from '../../services/UsersService';
 import { getBooks } from '../../services/BooksService';
 
-const User = () => {
+const UserRoute = () => {
   const [user, setUser] = useState(null);
   const [userBooks, setUserBooks] = useState([]);
   const [availableBooks, setAvailableBooks] = useState(null);
@@ -21,7 +21,7 @@ const User = () => {
       setUser(user);
       setUserBooks(user.Books);
     });
-    
+
     getBooks(true).then((books) => {
       setAvailableBooks(books);
     });
@@ -56,7 +56,7 @@ const User = () => {
         )}
         <div className='mb-4'>
           <Link
-            to={`/users/${user.url}/edit`}
+            to={`/users/${user.id}/edit`}
             state={{ user: user }}
             className='btn btn-primary me-3'
           >
@@ -81,4 +81,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default UserRoute;

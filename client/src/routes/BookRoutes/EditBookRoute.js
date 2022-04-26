@@ -1,11 +1,16 @@
 import { useState } from 'react';
-import { createBook } from '../../services/BooksService';
 import { useNavigate } from 'react-router-dom';
 import BookFormComponent from '../../components/Books/BookFormComponent';
+import { updateBook } from '../../services/BooksService';
 
-const CreateBook = () => {
-  const [inputs, setInputs] = useState({});
-  const [publishedDate, setPublishedDate] = useState(new Date());
+const EditBookRoute = ({ book }) => {
+  const [inputs, setInputs] = useState({
+    title: book.title,
+    author: book.author,
+    published: book.published,
+  });
+  const [publishedDate, setPublishedDate] = useState(new Date(book.published));
+  const [bookId, setBookId] = useState(book.id);
 
   let navigate = useNavigate();
 
@@ -28,24 +33,25 @@ const CreateBook = () => {
     const bookData = {
       title: inputs.title,
       author: inputs.author,
-      published: publishedDate,
+      published: inputs.published,
     };
 
-    createBook(bookData);
+    updateBook(bookData, bookId);
 
-    navigate('../books', { replace: true });
+    setBookId(bookId);
+
+    navigate(`../books/${bookId}`, { replace: true });
   };
-
   return (
     <BookFormComponent
       handleChange={handleChange}
-      publishedDate={publishedDate}
-      handleDateChange={handleDateChange}
       handleSubmit={handleSubmit}
       inputs={inputs}
-      btnText='Create User'
+      publishedDate={publishedDate}
+      handleDateChange={handleDateChange}
+      btnText='Save changes'
     />
   );
 };
 
-export default CreateBook;
+export default EditBookRoute;
