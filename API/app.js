@@ -5,6 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const sequelize = require('./sequelize');
 const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
 
 const seedDatabase = () => {
   // Seeders
@@ -23,12 +24,13 @@ const corsOptions = {
 
 const apiRequestLimiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
-  max: 2, // limit each IP to 2 requests per windowMs
+  max: 20, // limit each IP to 2 requests per windowMs
 });
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(apiRequestLimiter);
+app.use(helmet());
 
 // Controllers
 const userRoutes = require('./routes/users');
