@@ -18,8 +18,6 @@ const Book = () => {
 
   const deleteButtonHandler = () => {
     deleteBook(book.id);
-
-    navigate('../books', { replace: true });
   };
 
   return (

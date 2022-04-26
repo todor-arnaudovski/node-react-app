@@ -6,6 +6,7 @@ import UsersPage from './pages/UserPages/UsersPage';
 import UserPage from './pages/UserPages/UserPage';
 import CreateUserPage from './pages/UserPages/CreateUserPage';
 import EditUserPage from './pages/UserPages/EditUserPage';
+import AddBookPage from './pages/UserPages/AddBookPage';
 import BooksPage from './pages/BookPages/BooksPage';
 import BookPage from './pages/BookPages/BookPage';
 import CreateBookPage from './pages/BookPages/CreateBookPage';
@@ -21,6 +22,7 @@ function App() {
         <Route path="users/:id" element={<UserPage />} />
         <Route path="users/new" element={<CreateUserPage />} />
         <Route path="users/:id/edit" element={<EditUserPage />} />
+        <Route path="users/:id/addBook" element={<AddBookPage />} />
         <Route path="books" element={<BooksPage />} />
         <Route path="books/:id" element={<BookPage />} />
         <Route path="books/new" element={<CreateBookPage />} />

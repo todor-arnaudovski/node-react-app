@@ -62,10 +62,10 @@ export async function updateBook(bookData, id) {
   return user;
 }
 
-export async function addSelectedBook(updateData) {
-  const { id } = updateData;
+export async function addBookToUser(updateData) {
+  const { bookId } = updateData;
 
-  if (!id) return console.log('You must select a book.');
+  if (!bookId) return console.log('You must select a book.');
 
   const requestOptions = {
     method: 'PATCH',
@@ -74,7 +74,7 @@ export async function addSelectedBook(updateData) {
   };
 
   try {
-    const response = await fetch(`/api/books/${id}`, requestOptions);
+    const response = await fetch(`/api/books/${bookId}`, requestOptions);
     const book = await response.json();
 
     return book;

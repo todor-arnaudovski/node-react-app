@@ -33,7 +33,7 @@ const EditBookRoute = ({ book }) => {
     const bookData = {
       title: inputs.title,
       author: inputs.author,
-      published: inputs.published,
+      published: publishedDate,
     };
 
     updateBook(bookData, bookId);

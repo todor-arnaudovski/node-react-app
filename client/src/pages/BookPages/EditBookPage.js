@@ -6,7 +6,6 @@ import { useLocation } from 'react-router-dom';
 const EditBookPage = () => {
   const location = useLocation();
   const { book } = location.state;
-  console.log(book)
 
   return (
     <div className='App'>
