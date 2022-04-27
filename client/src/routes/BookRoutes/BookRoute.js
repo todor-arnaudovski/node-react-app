@@ -18,6 +18,8 @@ const Book = () => {
 
   const deleteButtonHandler = () => {
     deleteBook(book.id);
+
+    navigate(-1);
   };
 
   return (

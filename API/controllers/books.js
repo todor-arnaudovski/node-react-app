@@ -77,7 +77,7 @@ const updateBook = async (req, res) => {
   try {
     const book = await Book.findOne({ where: { id: id } });
 
-    if (!book) throw new Error('book not found.')
+    if (!book) throw new Error('book not found.');
 
     book.set({
       title: req.body.title,
@@ -104,14 +104,14 @@ const updateBookUser = async (req, res) => {
   const userId = req.body.userId;
 
   try {
-    if (!bookId || !userId) throw new Error('Id cannot be null.');
+    if (!bookId) throw new Error('Id cannot be null.');
 
-    const bookToAddUserTo = await Book.update(
-      { userId: userId },
+    const bookWithUpdatedUser = await Book.update(
+      { userId: userId ? userId : null },
       { where: { id: bookId } }
     );
 
-    res.send(bookToAddUserTo);
+    res.send(bookWithUpdatedUser);
   } catch (err) {
     console.log(err.message);
     res.send(err.message);

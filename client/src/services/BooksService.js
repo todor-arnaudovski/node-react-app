@@ -84,6 +84,26 @@ export async function addBookToUser(updateData) {
   }
 }
 
+export async function removeBookFromUser(updateData) {
+  const { bookId } = updateData;
+
+  const requestOptions = {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updateData),
+  };
+
+  try {
+    const response = await fetch(`/api/books/${bookId}`, requestOptions);
+    const book = await response.json();
+
+    return book;
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+}
+
 export async function deleteBook(id) {
   const requestOptions = {
     method: 'DELETE',
