@@ -6,9 +6,13 @@ const Books = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    getBooks().then((books) => {
-      setBooks(books);
-    });
+    getBooks()
+      .then((books) => {
+        setBooks(books);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   }, []);
 
   return books.length > 0 && <BooksComponent books={books} hasUserRow={true} />;

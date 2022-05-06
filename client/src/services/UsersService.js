@@ -1,22 +1,26 @@
 export async function getUsers() {
   try {
     const response = await fetch('/api/users');
+    if (!response.ok) throw new Error(response.statusText);
+
     const users = await response.json();
+
     return users;
   } catch (err) {
-    console.error(err);
-    return [];
+    throw new Error(err.message);
   }
 }
 
 export async function getUser(id) {
   try {
     const response = await fetch(`/api/users/${id}`);
+    if (!response.ok) throw new Error(response.statusText);
+
     const user = await response.json();
+
     return user;
   } catch (err) {
-    console.error(err);
-    return null;
+    throw new Error(err.message);
   }
 }
 
@@ -27,10 +31,12 @@ export async function createUser(userData) {
     body: JSON.stringify(userData),
   };
 
-  const response = await fetch('/api/users', requestOptions);
-  const user = await response.json();
-
-  return user;
+  try {
+    const response = await fetch('/api/users', requestOptions);
+    if (!response.ok) throw new Error(response.statusText);
+  } catch (err) {
+    throw new Error(err.message);
+  }
 }
 
 export async function updateUser(userData, id) {
@@ -40,10 +46,12 @@ export async function updateUser(userData, id) {
     body: JSON.stringify(userData),
   };
 
-  const response = await fetch(`/api/users/${id}`, requestOptions);
-  const user = await response.json();
-
-  return user;
+  try {
+    const response = await fetch(`/api/users/${id}`, requestOptions);
+    if (!response.ok) throw new Error(response.statusText);
+  } catch (err) {
+    throw new Error(err.message);
+  }
 }
 
 export async function deleteUser(id) {
@@ -52,10 +60,10 @@ export async function deleteUser(id) {
     headers: { 'Content-Type': 'application/json' },
   };
 
-  const response = await fetch(`/api/users/${id}`, requestOptions);
-  const user = await response.json();
-
-  return user;
-  
-  
+  try {
+    const response = await fetch(`/api/users/${id}`, requestOptions);
+    if (!response.ok) throw new Error(response.statusText);
+  } catch (err) {
+    throw new Error(err.message);
+  }
 }

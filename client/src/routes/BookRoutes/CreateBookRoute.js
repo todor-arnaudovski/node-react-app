@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { createBook } from '../../services/BooksService';
 import { useNavigate } from 'react-router-dom';
 import BookFormComponent from '../../components/Books/BookFormComponent';
+import { toastError, toastSuccess } from '../../services/ToastService';
 
 const CreateBook = () => {
   const [inputs, setInputs] = useState({});
@@ -22,7 +23,7 @@ const CreateBook = () => {
     setPublishedDate(e);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const bookData = {
@@ -31,8 +32,13 @@ const CreateBook = () => {
       published: publishedDate,
     };
 
-    createBook(bookData);
-
+    try {
+      await createBook(bookData);
+      toastSuccess('Book created');
+    } catch (err) {
+      toastError(err.message);
+    }
+    
     navigate('../books', { replace: true });
   };
 
@@ -43,7 +49,7 @@ const CreateBook = () => {
       handleDateChange={handleDateChange}
       handleSubmit={handleSubmit}
       inputs={inputs}
-      btnText='Create User'
+      btnText='Create Book'
     />
   );
 };

@@ -2,14 +2,19 @@ import { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { getUsers } from '../../services/UsersService';
+import { toastError } from '../../services/ToastService';
 
 const UsersRoute = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    getUsers().then((users) => {
-      setUsers(users);
-    });
+    getUsers()
+      .then((users) => {
+        setUsers(users);
+      })
+      .catch((err) => {
+        toastError(err.messsage);
+      });
   }, []);
 
   const usersRows = users.map((user) => {

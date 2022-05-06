@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserFormComponent from '../../components/Users/UserFormComponent';
 import { updateUser } from '../../services/UsersService';
+import { toastError, toastSuccess } from '../../services/ToastService';
 
 const EditUserRoute = ({ user }) => {
   const [inputs, setInputs] = useState({
@@ -22,7 +23,7 @@ const EditUserRoute = ({ user }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const userData = {
@@ -31,7 +32,12 @@ const EditUserRoute = ({ user }) => {
       interests: inputs.interests,
     };
 
-    updateUser(userData, userId);
+    try {
+      await updateUser(userData, userId);
+      toastSuccess('User updated');
+    } catch (err) {
+      toastError(err.message);
+    }
 
     setUserId(userId);
 

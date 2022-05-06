@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import UsersPage from './pages/UserPages/UsersPage';
@@ -28,6 +29,7 @@ function App() {
         <Route path="books/new" element={<CreateBookPage />} />
         <Route path="books/:id/edit" element={<EditBookPage />} />
       </Routes>
+      <ToastContainer />
     </BrowserRouter>
   );
 }

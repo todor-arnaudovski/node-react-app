@@ -2,32 +2,38 @@ export async function getBooks(getAvailable = false) {
   if (getAvailable) {
     try {
       const response = await fetch('/api/books/?available=true');
+      if (!response.ok) throw new Error(response.statusText);
+
       const availableBooks = await response.json();
+
       return availableBooks;
     } catch (err) {
-      console.log(err);
-      return [];
+      throw new Error(err.message);
     }
   }
 
   try {
     const response = await fetch('/api/books');
+    if (!response.ok) throw new Error(response.statusText);
+
     const books = await response.json();
+
     return books;
   } catch (err) {
-    console.error(err);
-    return [];
+    throw new Error(err.message);
   }
 }
 
 export async function getBook(id) {
   try {
     const response = await fetch(`/api/books/${id}`);
+    if (!response.ok) throw new Error(response.statusText);
+
     const book = await response.json();
+
     return book;
   } catch (err) {
-    console.error(err);
-    return null;
+    throw new Error(err.message);
   }
 }
 
@@ -40,12 +46,9 @@ export async function createBook(bookData) {
 
   try {
     const response = await fetch('/api/books', requestOptions);
-    const book = await response.json();
-
-    return book;
+    if (!response.ok) throw new Error(response.statusText);
   } catch (err) {
-    console.log(err);
-    return null;
+    throw new Error(err.message);
   }
 }
 
@@ -56,10 +59,12 @@ export async function updateBook(bookData, id) {
     body: JSON.stringify(bookData),
   };
 
-  const response = await fetch(`/api/books/${id}`, requestOptions);
-  const user = await response.json();
-
-  return user;
+  try {
+    const response = await fetch(`/api/books/${id}`, requestOptions);
+    if (!response.ok) throw new Error(response.statusText);
+  } catch (err) {
+    throw new Error(err.message);
+  }
 }
 
 export async function addBookToUser(updateData) {
@@ -75,12 +80,9 @@ export async function addBookToUser(updateData) {
 
   try {
     const response = await fetch(`/api/books/${bookId}`, requestOptions);
-    const book = await response.json();
-
-    return book;
+    if (!response.ok) throw new Error(response.statusText);
   } catch (err) {
-    console.log(err);
-    return null;
+    throw new Error(err.message);
   }
 }
 
@@ -95,12 +97,9 @@ export async function removeBookFromUser(updateData) {
 
   try {
     const response = await fetch(`/api/books/${bookId}`, requestOptions);
-    const book = await response.json();
-
-    return book;
+    if (!response.ok) throw new Error(response.statusText);
   } catch (err) {
-    console.log(err);
-    return null;
+    throw new Error(err.message);
   }
 }
 
@@ -112,11 +111,8 @@ export async function deleteBook(id) {
 
   try {
     const response = await fetch(`/api/books/${id}`, requestOptions);
-    const book = await response.json();
-
-    return book;
+    if (!response.ok) throw new Error(response.statusText);
   } catch (err) {
-    console.log(err);
-    return null;
+    throw new Error(err.message);
   }
 }

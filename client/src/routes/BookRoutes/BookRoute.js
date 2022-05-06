@@ -2,6 +2,7 @@ import { Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getBook, deleteBook } from '../../services/BooksService';
+import { toastError, toastSuccess } from '../../services/ToastService';
 
 const Book = () => {
   const [book, setBook] = useState(null);
@@ -11,13 +12,22 @@ const Book = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getBook(params.id).then((book) => {
-      setBook(book);
-    });
+    getBook(params.id)
+      .then((book) => {
+        setBook(book);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   }, [params.id]);
 
-  const deleteButtonHandler = () => {
-    deleteBook(book.id);
+  const deleteButtonHandler = async () => {
+    try {
+      await deleteBook(book.id);
+      toastSuccess('Deleted book');
+    } catch (err) {
+      toastError(err.message);
+    }
 
     navigate(-1);
   };

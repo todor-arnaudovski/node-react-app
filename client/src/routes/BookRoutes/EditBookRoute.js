@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BookFormComponent from '../../components/Books/BookFormComponent';
 import { updateBook } from '../../services/BooksService';
+import { toastError, toastSuccess } from '../../services/ToastService';
 
 const EditBookRoute = ({ book }) => {
   const [inputs, setInputs] = useState({
@@ -27,7 +28,7 @@ const EditBookRoute = ({ book }) => {
     setPublishedDate(e);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const bookData = {
@@ -36,7 +37,12 @@ const EditBookRoute = ({ book }) => {
       published: publishedDate,
     };
 
-    updateBook(bookData, bookId);
+    try {
+      await updateBook(bookData, bookId);
+      toastSuccess('Book updated');
+    } catch (err) {
+      toastError(err.message);
+    }
 
     setBookId(bookId);
 

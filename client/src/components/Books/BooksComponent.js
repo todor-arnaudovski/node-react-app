@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Button, Table } from 'react-bootstrap';
-import { removeBookFromUser } from '../../services/BooksService';
 
-const Books = ({ books, hasUserRow }) => {
+const Books = ({ books, hasUserRow, removeBookHandler }) => {
   const userRow = (book) => {
     if (hasUserRow) {
       if (book.User) {
@@ -16,14 +15,6 @@ const Books = ({ books, hasUserRow }) => {
       }
       return <td className='text-success'>Available</td>;
     }
-  };
-
-  const removeBookHandler = (bookId) => {
-    const updateData = {
-      bookId: bookId,
-    };
-
-    removeBookFromUser(updateData);
   };
 
   const booksRows = books.map((book) => {

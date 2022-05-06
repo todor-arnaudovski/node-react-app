@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 import { addBookToUser } from '../../services/BooksService';
+import { toastError, toastSuccess } from '../../services/ToastService';
 
-const AddBookRoute = ({books, userId}) => {
+const AddBookRoute = ({ books, userId }) => {
   const [selectedBookId, setSelectedBookId] = useState('');
 
   let navigate = useNavigate();
@@ -12,7 +13,7 @@ const AddBookRoute = ({books, userId}) => {
     setSelectedBookId(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const updateData = {
@@ -20,9 +21,15 @@ const AddBookRoute = ({books, userId}) => {
       userId: userId,
     };
 
-    addBookToUser(updateData);
+    try {
+      addBookToUser(updateData);
 
-    navigate(`../users/${userId}`, { replace: true });
+      toastSuccess('Added book to user');
+
+      navigate(`../users/${userId}`, { replace: true });
+    } catch (err) {
+      toastError(err.message);
+    }
   };
 
   const bookList = books.map((book) => {
@@ -33,8 +40,7 @@ const AddBookRoute = ({books, userId}) => {
     );
   });
 
-  return (
-    books.length > 0 ?
+  return books.length > 0 ? (
     <Form onSubmit={handleSubmit}>
       <Form.Group className='mb-3' controlId='availableBook'>
         <Form.Label>Select available book:</Form.Label>
@@ -53,7 +59,8 @@ const AddBookRoute = ({books, userId}) => {
       <Button variant='primary' type='submit'>
         Add book
       </Button>
-    </Form> :
+    </Form>
+  ) : (
     <p className='text-danger'>There are no available books</p>
   );
 };
